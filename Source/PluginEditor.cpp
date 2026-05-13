@@ -5,45 +5,54 @@ LYNEVIPluginEditor::LYNEVIPluginEditor(LYNEVIPluginProcessor& p)
 {
     setSize(800, 500);
 
-    auto addKnob = [&](juce::Slider& knob, int x, int y, int size = 55) {
+    lcdDisplay = std::make_unique<LcdDisplay>();
+    addAndMakeVisible(*lcdDisplay);
+    lcdDisplay->setBounds(280, 160, 320, 140);
+
+    auto setupKnob = [&](juce::Slider& knob, int x, int y) {
         knob.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
         knob.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
         addAndMakeVisible(knob);
-        knob.setBounds(x, y, size, size);
+        knob.setBounds(x, y, 58, 58);
     };
 
-    addKnob(driveKnob, 120, 140);
-    addKnob(bassKnob, 240, 80);
-    addKnob(middleKnob, 320, 70);
-    addKnob(trebleKnob, 400, 80);
-    addKnob(presenceKnob, 520, 140);
-    addKnob(chanVolKnob, 680, 220);
-    addKnob(reverbKnob, 680, 340);
-    addKnob(outputKnob, 120, 340);
-    addKnob(ampModelsKnob, 280, 420, 70);
-    addKnob(effectsKnob, 520, 420, 70);
+    setupKnob(driveKnob, 118, 138);
+    setupKnob(bassKnob, 235, 78);
+    setupKnob(middleKnob, 315, 68);
+    setupKnob(trebleKnob, 395, 78);
+    setupKnob(presenceKnob, 518, 138);
+    setupKnob(chanVolKnob, 675, 215);
+    setupKnob(reverbKnob, 675, 335);
+    setupKnob(outputKnob, 118, 335);
+    setupKnob(ampModelsKnob, 275, 415);
+    setupKnob(effectsKnob, 515, 415);
 }
 
 void LYNEVIPluginEditor::paint(juce::Graphics& g)
 {
+    if (backgroundImage.isNull())
+        backgroundImage = juce::ImageCache::getFromMemory(BinaryData::bean_red_png, BinaryData::bean_red_pngSize);
+
     if (backgroundImage.isValid())
         g.drawImage(backgroundImage, getLocalBounds().toFloat());
     else
-        g.fillAll(juce::Colour(0xFFCC0000)); // Red bean fallback
+        g.fillAll(juce::Colour(0xFFCC0000));
 
     g.setColour(juce::Colours::white);
-    g.setFont(16.0f);
-
+    g.setFont(15.0f);
     g.drawText("DRIVE", 115, 205, 70, 20, juce::Justification::centred);
     g.drawText("BASS", 235, 135, 70, 20, juce::Justification::centred);
     g.drawText("MIDDLE", 315, 125, 70, 20, juce::Justification::centred);
     g.drawText("TREBLE", 395, 135, 70, 20, juce::Justification::centred);
-    g.drawText("PRESENCE", 515, 205, 70, 20, juce::Justification::centred);
-    g.drawText("CHAN VOL", 665, 280, 80, 20, juce::Justification::centred);
-    g.drawText("REVERB", 665, 400, 80, 20, juce::Justification::centred);
-    g.drawText("OUTPUT", 115, 400, 70, 20, juce::Justification::centred);
-    g.drawText("AMP MODELS", 260, 490, 110, 20, juce::Justification::centred);
+    g.drawText("PRESENCE", 515, 205, 80, 20, juce::Justification::centred);
+    g.drawText("CHAN VOL", 665, 275, 80, 20, juce::Justification::centred);
+    g.drawText("REVERB", 665, 395, 80, 20, juce::Justification::centred);
+    g.drawText("OUTPUT", 115, 395, 70, 20, juce::Justification::centred);
+    g.drawText("AMP MODELS", 270, 490, 110, 20, juce::Justification::centred);
     g.drawText("EFFECTS", 510, 490, 100, 20, juce::Justification::centred);
 }
 
-void LYNEVIPluginEditor::resized() {}
+void LYNEVIPluginEditor::resized()
+{
+    lcdDisplay->setBounds(280, 160, 320, 140);
+}
