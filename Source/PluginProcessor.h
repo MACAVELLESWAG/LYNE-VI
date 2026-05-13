@@ -1,7 +1,9 @@
 #pragma once
+
 #include <JuceHeader.h>
 
-class LYNEVIPluginProcessor : public juce::AudioProcessor {
+class LYNEVIPluginProcessor : public juce::AudioProcessor
+{
 public:
     LYNEVIPluginProcessor();
     void prepareToPlay(double sampleRate, int samplesPerBlock) override;

@@ -30,28 +30,26 @@ LYNEVIPluginEditor::LYNEVIPluginEditor(LYNEVIPluginProcessor& p)
 
 void LYNEVIPluginEditor::paint(juce::Graphics& g)
 {
-    // Background
     if (backgroundImage.isNull())
         backgroundImage = juce::ImageCache::getFromMemory(BinaryData::bean_red_png, BinaryData::bean_red_pngSize);
 
     if (backgroundImage.isValid())
         g.drawImage(backgroundImage, getLocalBounds().toFloat());
     else
-        g.fillAll(juce::Colour(0xFFCC0000));   // fallback red
+        g.fillAll(juce::Colour(0xFFCC0000));
 
-    // Labels
     g.setColour(juce::Colours::white);
     g.setFont(15.0f);
-    g.drawText("DRIVE",     115, 205, 70, 20, juce::Justification::centred);
-    g.drawText("BASS",      235, 135, 70, 20, juce::Justification::centred);
-    g.drawText("MIDDLE",    315, 125, 70, 20, juce::Justification::centred);
-    g.drawText("TREBLE",    395, 135, 70, 20, juce::Justification::centred);
-    g.drawText("PRESENCE",  515, 205, 80, 20, juce::Justification::centred);
-    g.drawText("CHAN VOL",  665, 275, 80, 20, juce::Justification::centred);
-    g.drawText("REVERB",    665, 395, 80, 20, juce::Justification::centred);
-    g.drawText("OUTPUT",    115, 395, 70, 20, juce::Justification::centred);
-    g.drawText("AMP MODELS",270, 490, 110, 20, juce::Justification::centred);
-    g.drawText("EFFECTS",   510, 490, 100, 20, juce::Justification::centred);
+    g.drawText("DRIVE", 115, 205, 70, 20, juce::Justification::centred);
+    g.drawText("BASS", 235, 135, 70, 20, juce::Justification::centred);
+    g.drawText("MIDDLE", 315, 125, 70, 20, juce::Justification::centred);
+    g.drawText("TREBLE", 395, 135, 70, 20, juce::Justification::centred);
+    g.drawText("PRESENCE", 515, 205, 80, 20, juce::Justification::centred);
+    g.drawText("CHAN VOL", 665, 275, 80, 20, juce::Justification::centred);
+    g.drawText("REVERB", 665, 395, 80, 20, juce::Justification::centred);
+    g.drawText("OUTPUT", 115, 395, 70, 20, juce::Justification::centred);
+    g.drawText("AMP MODELS", 270, 490, 110, 20, juce::Justification::centred);
+    g.drawText("EFFECTS", 510, 490, 100, 20, juce::Justification::centred);
 }
 
 void LYNEVIPluginEditor::resized()
