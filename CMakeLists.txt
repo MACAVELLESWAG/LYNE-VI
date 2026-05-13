@@ -18,8 +18,8 @@ juce_add_plugin(LYNE_VI
     COPY_PLUGIN_AFTER_BUILD TRUE
 )
 
-juce_add_binary_data(LYNE_VI_Data
-    SOURCES
+juce_add_binary_data(LYNE_VI_BinaryData
+    SOURCES 
         Assets/bean_red.png
         Assets/knob_filmstrip.png
 )
@@ -38,5 +38,5 @@ target_compile_definitions(LYNE_VI PRIVATE
 target_link_libraries(LYNE_VI PRIVATE
     juce::juce_audio_utils
     juce::juce_dsp
-    LYNE_VI_Data
+    LYNE_VI_BinaryData
 )
